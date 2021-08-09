@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { phonedata } from '../../../data/phonedata';
-
+// import actions from '../../../store/actions';
+// import { addToCart } from '../../../store/actions/addToCartAction';
 // import { Carousel } from 'react-responsive-carousel';
 // import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import { Link, useHistory } from "react-router-dom";
 
-const Product = () => {
+const Product = (props) => {
     const brands = [
         {
             label: 'Apple',
@@ -40,10 +41,14 @@ const Product = () => {
 
     const [selectedBrandArray,setselectedBrandArray] = useState([]);
     const [selectedProduct,setSelectedProduct] = useState([]);
-    const history = useHistory();
-    // const { id } = useParams();
+    const [cart,setCart] = useState([]);
 
-    const handleChange = (event) => {
+    const cartData = useSelector(state => state);
+    console.log(cartData);
+
+    const dispatch = useDispatch();
+    
+    const selectBrandHandler = (event) => {
         if (event.target.checked) {
             setselectedBrandArray([
                 ...selectedBrandArray,
@@ -53,15 +58,23 @@ const Product = () => {
             setselectedBrandArray(selectedBrandArray.filter(brand => brand !== event.target.value));
           }
     }
-
+    // filter and display phones based on checkbox selection
     useEffect(() => {
         if (selectedBrandArray.length === 0) {
             setSelectedProduct(phonedata);
-          } else {
+          } 
+        else {
             setSelectedProduct(
-                phonedata.filter(phone => selectedBrandArray.some(brand => phone.brand.toLowerCase() === brand.toLowerCase())))
+              phonedata.filter(phone => selectedBrandArray.some(brand => phone.brand.toLowerCase() === brand.toLowerCase())))
           }
         }, [selectedBrandArray]);
+    
+    // add to cart functionality
+    // const toCart = (phone) => {
+    //     dispatch(actions.addToCart(setCart(phone)))
+    //     // setCart(phonedata.filter(phone => phone.id == phoneId));
+    // }
+    // console.log(cart);
 
     return(
         <React.Fragment>
@@ -76,7 +89,7 @@ const Product = () => {
                                         <input type="checkbox"
                                             name={brand.name}
                                             value={brand.value}
-                                            onChange={handleChange}/>
+                                            onChange={selectBrandHandler}/>
                                         <span></span>
                                     </label>
                                 </div>
@@ -106,14 +119,15 @@ const Product = () => {
                                             <img className="product-images" src={phone.images[2]}/>
                                         </Carousel>
                                     </div> */}
-
-                                   {/* <a href={`/home/product/${phone.id}`} className="product-title">
-                                        {phone.title}
-                                   </a> */}
                                    <h5>
-                                    <Link className="product-title" 
-                                          to={`/home/${phone.id}`}>{phone.title}</Link>
+                                        <a className="product-title" 
+                                        href={`/home/product/${phone.id}`}>{phone.title}</a>
                                    </h5>
+                                    <button type="button" 
+                                        className="btn btn-dark"
+                                        onClick={() => dispatch({type: "ADD_TO_CART",payload: phone})}>
+                                       Add to Cart
+                                    </button>
                                 </div>
                             )
                         })

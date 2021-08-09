@@ -1,10 +1,12 @@
 import React from 'react';
 
 const IndividualProduct = (props) => {
-    console.log(props)
+    console.log("Individual Screen");
+    console.log(props);
+
     return(
         <React.Fragment>
-            <p>IndividualProduct Screen</p>
+            <p>Selected Product Screen</p>
             <p>{props.location.pathname}</p>
         </React.Fragment>
     )

@@ -9,7 +9,7 @@ const Header = () => {
                         <a href="/home/product">E-commerce</a>
                     </li>
                     <li className="header-cart">
-                        <a href="/home/cart" >Cart</a>
+                        <a href="/home/cart">Cart</a>
                     </li>
                 </ul>
             </div>

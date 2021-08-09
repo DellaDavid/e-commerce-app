@@ -70,7 +70,7 @@ li {
   width: 100%;
 }
 .header-ecommerce {
-  width: 96%;
+  width: 90%;
 }
 a {
   text-decoration: none !important;
@@ -151,7 +151,12 @@ a {
   margin: 37px auto;
   /* width: 37% !important; */
 }
-.carousel .thumbs-wrapper,
+li.header-cart {
+  border: 1px solid green;
+  border-radius: 10px 10px 10px 10px;
+  background-color: aliceblue;
+}
+/* .carousel .thumbs-wrapper,
 .carousel.carousel-slider .control-arrow {
   display: none;
-}
+} */

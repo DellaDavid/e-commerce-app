@@ -7,6 +7,7 @@ import IndividualProduct from './Landinglayout/IndividualProduct/IndividualProdu
 import Product from './Landinglayout/Product/product';
 
 const LandingLayout = (props) => {
+    console.log(props)
     return (
         <React.Fragment>
             <div className="d-flex flex-column p-2 landing-wrapper">
@@ -14,9 +15,9 @@ const LandingLayout = (props) => {
                     <Header></Header>
                 </div>
                 <div className="landing-content">
-                    <Route path="/home/product" component={Product}></Route>
-                    <Route path="/home/cart" component={Cart}></Route>
-                    <Route exact path={'/home/:id'} component={IndividualProduct}/>
+                    <Route exact path="/home/product" component={Product}></Route>
+                    <Route exact path="/home/product/:id" component={IndividualProduct}/>
+                    <Route exact path="/home/cart" component={Cart}></Route>
                 </div>
                 <div className="landing-footer">
                     <Footer></Footer>
